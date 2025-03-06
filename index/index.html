@@ -34,6 +34,57 @@
             opacity: 1;
         }
     </style>
+    <style>
+    /* Enhanced Mobile Styles */
+    @media (max-width: 768px) {
+        .timeline__info-btn {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+        }
+        
+        .popup .popup-content {
+            width: 90%;
+            margin: 20% auto;
+            padding: 1.5rem;
+        }
+        
+        .popup .close {
+            font-size: 32px; /* Larger hit area for mobile */
+            padding: 10px;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+        
+        .social-popups-container {
+            width: 95%;
+            padding: 1rem;
+        }
+        
+        .social-preview {
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-link {
+            display: block;
+            text-align: center;
+            padding: 12px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .cta-button {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+    }
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -532,6 +583,26 @@
                     document.getElementById('timeline-popup').style.display = 'block';
                 });
             });
+    
+            // Improved close button functionality for timeline popup
+            const timelineCloseBtn = document.querySelector('#timeline-popup .close');
+            if (timelineCloseBtn) {
+                timelineCloseBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    document.getElementById('timeline-popup').style.display = 'none';
+                });
+            }
+    
+            // Close popup when clicking outside
+            const timelinePopup = document.getElementById('timeline-popup');
+            if (timelinePopup) {
+                timelinePopup.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                    }
+                });
+            }
         });
     </script>
 </body>
