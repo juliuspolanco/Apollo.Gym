@@ -925,6 +925,132 @@ body {
   }
 }
 
+/* Enhanced Mobile Styles */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-button,
+  .submit-button,
+  .call-button,
+  .review-button,
+  .footer-cta {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Improve modal close buttons */
+  .close,
+  .close-modal {
+    font-size: 32px; /* Larger hit area for mobile */
+    padding: 10px;
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
+
+  /* Adjust popup positioning */
+  .popup-content,
+  .modal-content {
+    width: 90%;
+    margin: 30% auto;
+    padding: 1.5rem;
+  }
+
+  /* Improve equipment slider for mobile */
+  .equipment-slider {
+    margin-top: 2rem;
+  }
+
+  .equipment-slider .image-placeholder {
+    max-height: 300px;
+  }
+
+  .slider-controls {
+    padding: 0.5rem 0;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Adjust equipment grid */
+  .equipment-grid {
+    gap: 0.75rem;
+  }
+
+  .equipment-item {
+    min-height: 100px;
+    padding: 1.5rem;
+  }
+
+  /* Adjust footer for mobile */
+  .footer-container {
+    gap: 1.5rem;
+  }
+
+  .footer-column {
+    gap: 0.75rem;
+  }
+
+  .footer-logo img {
+    height: 60px;
+  }
+
+  /* Ensure form elements are properly sized on mobile */
+  input,
+  select,
+  textarea {
+    padding: 12px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .equipment-item {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .social-preview {
+    margin-bottom: 1.5rem;
+  }
+
+  .social-stats {
+    gap: 1rem;
+  }
+
+  .social-stats .number {
+    font-size: 1rem;
+  }
+
+  .social-stats .label {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 768px) {
   .section-title {
     font-size: 2.5rem;
@@ -1465,4 +1591,5 @@ body {
   transform: translateY(-2px);
   border: 1px solid var(--vintage-red);
 }
+
 
