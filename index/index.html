@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APOLLO GYM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .timeline__img-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline__info-btn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: var(--vintage-red);
+            color: var(--vintage-white);
+            border: none;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 4px;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+        }
+
+        .timeline__info-btn:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+                <h1>APOLLO GYM</h1>
+            </div>
+            <nav>
+                <button class="mobile-nav-toggle">☰</button>
+                <ul>
+                    <li><a href="index.html"><i data-lucide="home"></i> HOME</a></li>
+                    <li><a href="#why-us"><i data-lucide="star"></i> WHY US</a></li>
+                    <li><a href="#contact"><i data-lucide="phone"></i> CONTACT</a></li>
+                    <li><a href="trainingpage.html"><i data-lucide="dumbbell"></i> TRAINING</a></li>
+                    <li><a href="register_interest.html" class="register-button">REGISTER YOUR INTEREST</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Rest of the content remains the same -->
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">APOLLO GYM</h1>
+            <p class="hero-subtitle">STRENGTH • POWER • DEDICATION</p>
+            <a href="register_interest.html#book-tour" class="cta-button">JOIN NOW</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">ABOUT US</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <h3>UNIQUE TRAINING ENVIRONMENT</h3>
+                <p>APOLLO GYM SPANS AN IMPRESSIVE 720SQM OVER 2 LEVELS, MAKING IT ONE OF THE MOST COMPLETE FUNCTIONAL FITNESS FACILITIES IN AUSTRALIA. OUR ENVIRONMENT IS DESIGNED TO BE NON-INTIMIDATING AND INCLUSIVE, FOSTERING A CLUB CULTURE ATMOSPHERE WHERE EVERYONE FEELS WELCOME.</p>
+                
+                <h3>EXPERT GUIDANCE</h3>
+                <p>WITH OWNERS WHO ARE LEADERS IN THE FIELD PROVIDING ON-SITE ASSISTANCE AND HIGHLY QUALIFIED INSTRUCTORS, WE ENSURE MEMBERS RECEIVE THE BEST POSSIBLE GUIDANCE. OUR PROGRAMMING CATERS TO ALL LEVELS, FROM BEGINNERS TO ELITE ATHLETES.</p>
+                
+                <h3>COMPREHENSIVE FACILITIES</h3>
+                <p>FROM OUR 35M LONG INDOOR SLED TRACK TO OUR EXTENSIVE 30M LENGTH OF DUMBBELLS AND KETTLEBELLS, WE PROVIDE EVERYTHING YOU NEED FOR ANY TYPE OF TRAINING. WHETHER IT'S WELLNESS OR SPORTS-SPECIFIC TRAINING, OUR CENTRE IS EQUIPPED TO HELP YOU ACHIEVE YOUR GOALS.</p>
+            </div>
+            <div class="about-highlights">
+    <img 
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20230421_074449.jpg-AUkXpGpFzIQLRn8Ir1roY3WWrJouud.jpeg" 
+        alt="Apollo Gym Building Exterior" 
+        class="about-image"
+        style="width: 100%; height: auto; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    >
+    <div class="highlights-box">
+        <h3>KEY HIGHLIGHTS</h3>
+        <ul>
+            <li>• 24/7 ACCESS WITH SWIPE TAG SYSTEM</li>
+            <li>• MEMBER-ONLY, NON-CROWDED FACILITY</li>
+            <li>• FREE ONLINE TRAINING THROUGH TEAMBLDR APP</li>
+            <li>• FLEXIBLE MONTH-TO-MONTH MEMBERSHIPS</li>
+            <li>• EXTENSIVE RANGE OF COMMERCIAL GRADE EQUIPMENT</li>
+            <li>• DEDICATED TRAINING AREAS FOR ALL MUSCLE GROUPS</li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </section>
+
+    <!-- Equipment Section -->
+    <section id="equipment" class="section">
+        <h2 class="section-title">TOP TIER EQUIPMENT</h2>
+        <p class="section-subtitle">APOLLO GYM OPEN 24HRS SPANS 720SQM OVER 2 LEVELS. IT IS ONE OF THE MOST COMPLETE FUNCTIONAL FITNESS FACILITIES IN AUSTRALIA.</p>
+        
+        <div class="equipment-grid">
+            <div class="equipment-item">
+                <p>FULL OF STATE OF THE ART, HIGHEST LEVEL, COMMERCIAL EXERCISE EQUIPMENT</p>
+            </div>
+            <div class="equipment-item">
+                <p>COMMERCIAL BRANDS SUCH AS HAMMER STRENGTH, WATSON, NAUTILUS, SORINEX, ROUGE, WEST SIDE BARBELL, IVANCO, POWER LIFT, LIFE FITNESS, ETC.</p>
+            </div>
+            <div class="equipment-item">
+                <p>35M LONG INDOOR SLED, WEIGHT LOCOMOTION TRACK, ALSO HUGE SAFE OUTDOOR TRAINING AREA</p>
+            </div>
+            <div class="equipment-item">
+                <p>30M LENGTH OF DUMBBELLS & KETTLE BELLS</p>
+            </div>
+            <div class="equipment-item">
+                <p>LARGE SELECTION & DIVERSITY OF PIN & PLATE LOADED MACHINES</p>
+            </div>
+            <div class="equipment-item">
+                <p>TOP SELECTION OF HIGH INTENSITY CARDIO EQUIPMENT</p>
+            </div>
+            <div class="equipment-item">
+                <p>LEG AREA SPANNING A 60M LENGTH</p>
+            </div>
+            <div class="equipment-item">
+                <p>OTHER LARGE SCALE APPARATUS TRAINING AREAS: BACK, UPPER BODY, GLUTE, POSTERIOR CHAIN, ARM, TOTAL BODY CIRCUIT & GYMNASTIC</p>
+            </div>
+        </div>
+        
+        <div class="equipment-slider" style="margin-top: 3rem; clear: both; position: relative; z-index: 1;">
+            <div class="image-placeholder" style="max-height: 450px; overflow: hidden;"></div>
+            <div class="slider-controls">
+                <button class="prev-btn">&#10094;</button>
+                <div class="slider-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button class="next-btn">&#10095;</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="section">
+        <h2 class="section-title">OUR HISTORY</h2>
+        
+        <div class="history-boxes">
+            <div class="history-box">
+                <h3>The Mighty Apollo</h3>
+                <p>Our gym's legacy traces back to the legendary strongman, Mighty Young Apollo, born as Paul Anderson in 1893. Known for his incredible feats of strength, Apollo gained fame in the early 20th century for performances that included supporting a car and passengers on his chest.</p>
+                <p>Apollo's strength and showmanship inspired generations, laying the foundation for what would become Apollo Gym. His dedication to physical culture and pushing the limits of human strength continue to influence our gym's philosophy today.</p>
+            </div>
+            
+            <div class="history-box">
+                <h3>Apollo Gym's Journey</h3>
+                <p>Established in 1990, Apollo Gym carries forward the legacy of strength and dedication embodied by Mighty Young Apollo. For over three decades, we've been at the forefront of fitness innovation, combining time-tested techniques with modern training methods.</p>
+                <p>Our gym draws upon its special 120-year foundation, spanning three generations of strength enthusiasts. From humble beginnings to becoming a premier 24-hour fitness destination, Apollo Gym has consistently evolved while staying true to its roots in physical culture and strength training.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="section">
+    <h2 class="timeline-title">TIMELINE</h2>
+    <p class="timeline-subtitle">JOURNEY THROUGH THE DECADES OF STRENGTH</p>
+    
+    <div id="timeline-1" class="timeline-container">
+        <div class="timeline-header">
+            <h2 class="timeline-header__title">APOLLO GYM JOURNEY</h2>
+            <h3 class="timeline-header__subtitle">STRENGTH THROUGH THE YEARS</h3>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item" data-text="BIRTH OF A LEGEND">
+                <div class="timeline__content">
+                    <div class="timeline__img-container">
+                        <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/the%20mighty%20young%20apollo-3sGuVKeZHhLCtKYQvlxkUAMiqVmWDl.png" alt="Mighty Young Apollo Portrait" style="object-fit: contain; background-color: var(--vintage-black);">
+                        <button class="timeline__info-btn">Click for more info</button>
+                    </div>
+                    <h2 class="timeline__content-title">1893</h2>
+                    <p class="timeline__content-desc">Birth of Paul Anderson (Mighty Young Apollo), whose legacy would later inspire the foundation of Apollo Gym.</p>
+                    <div class="timeline__content-info" style="display:none;">
+                        <h3>The Birth of a Legend</h3>
+                        <p>Paul Anderson, who would later become known as Mighty Young Apollo, was born in 1893. His incredible journey in the world of strength and physical culture would lay the groundwork for what would eventually become Apollo Gym.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item" data-text="RISE TO FAME">
+                <div class="timeline__content">
+                    <div class="timeline__img-container">
+                        <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-04%20090435-JBSjHybGtHI9RWwYLsNWpmpscQkmnX.png" alt="Mighty Apollo's Famous Elephant Feat" style="object-fit: contain; background-color: var(--vintage-black);">
+                        <button class="timeline__info-btn">Click for more info</button>
+                    </div>
+                    <h2 class="timeline__content-title">1920</h2>
+                    <p class="timeline__content-desc">Mighty Apollo gains fame for his incredible feats of strength, including supporting a car and passengers on his chest.</p>
+                    <div class="timeline__content-info" style="display:none;">
+                        <h3>The Rise of Mighty Apollo</h3>
+                        <p>By 1920, Mighty Young Apollo had established himself as a legendary strongman, performing incredible feats of strength that would captivate audiences and inspire generations to come. His performances, including supporting a car and passengers on his chest, demonstrated the extraordinary capabilities of human strength.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item" data-text="ESTABLISHMENT">
+                <div class="timeline__content">
+                    <div class="timeline__img-container">
+                        <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/the%20mighty%20apollo%20gym-pjqHszSZkbS1MAOV8K6mOKbWs9meNg.png" alt="Original Apollo Gym Building 1990" style="object-fit: contain; background-color: var(--vintage-black);">
+                        <button class="timeline__info-btn">Click for more info</button>
+                    </div>
+                    <h2 class="timeline__content-title">1990</h2>
+                    <p class="timeline__content-desc">Apollo Gym's establishment, carrying forward the legacy of strength and dedication embodied by Mighty Young Apollo.</p>
+                    <div class="timeline__content-info" style="display:none;">
+                        <h3>The Birth of Apollo Gym</h3>
+                        <p>In 1990, Apollo Gym was established in this iconic building, with its distinctive Art Deco facade becoming a landmark in the area. The gym was founded with a clear vision to carry forward the legacy of strength and dedication embodied by Mighty Young Apollo, while also embracing martial arts and diverse training methods.</p>
+                        <p>The original location featured the prominent "THE MIGHTY APOLLO GYM" signage, paying homage to its namesake while establishing itself as a comprehensive martial arts and strength training center.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item" data-text="EXPANSION">
+    <div class="timeline__content">
+        <div class="timeline__img-container">
+            <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/early%202000%27s%20apollo%20gym-M3gv6jRSxXGUp599432nvPa1fbEBA3.png" alt="Apollo Gym Interior 2000s" style="object-fit: contain; background-color: var(--vintage-black);">
+            <button class="timeline__info-btn">Click for more info</button>
+        </div>
+        <h2 class="timeline__content-title">2000</h2>
+        <p class="timeline__content-desc">Major expansion of facilities and introduction of 24/7 access, making fitness more accessible than ever.</p>
+        <div class="timeline__content-info" style="display:none;">
+            <h3>Growth and Innovation</h3>
+            <p>The year 2000 marked a significant milestone with the expansion of facilities and the groundbreaking introduction of 24/7 access. As shown in this historical photo, the gym was equipped with modern training equipment, featuring an extensive free weight area and professional-grade machines. This renovation and expansion made Apollo Gym more accessible to members while maintaining its commitment to excellence in strength training.</p>
+        </div>
+    </div>
+</div>
+            <div class="timeline-item" data-text="MODERN ERA">
+    <div class="timeline__content">
+        <div class="timeline__img-container">
+            <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/473696374_18070581826782880_2385226424555800147_n.jpg-iiC95ZKZ5y0ft7lj5wJFafiQMhEsn6.jpeg" alt="Apollo Gym Modern Evolution" style="object-fit: contain; background-color: var(--vintage-black);">
+            <button class="timeline__info-btn">Click for more info</button>
+        </div>
+        <h2 class="timeline__content-title">2010</h2>
+        <p class="timeline__content-desc">Integration of modern training techniques and technology while maintaining traditional strength methods, creating a perfect blend of old and new.</p>
+        <div class="timeline__content-info" style="display:none;">
+            <h3>Bridging Tradition and Innovation</h3>
+            <p>2010 marked a significant evolution for Apollo Gym with the introduction of Elite Sports Performance programs and the integration of TeamBuildr technology. This period saw the gym expand its services to include specialized training for sports teams, cycling groups, and performance athletes, while maintaining its core strength training foundation.</p>
+            <p>The gym began offering comprehensive training programs that combined traditional strength methods with modern sports science, creating a unique training environment that catered to both serious athletes and fitness enthusiasts. The implementation of TeamBuildr technology allowed for better tracking of member progress and more personalized training approaches.</p>
+        </div>
+    </div>
+</div>
+            <div class="timeline-item" data-text="PRESENT">
+                <div class="timeline__content">
+                    <div class="timeline__img-container">
+                        <img class="timeline__img" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20230421_074449.jpg-AUkXpGpFzIQLRn8Ir1roY3WWrJouud.jpeg" alt="Apollo Gym Today">
+                        <button class="timeline__info-btn">Click for more info</button>
+                    </div>
+                    <h2 class="timeline__content-title">Current Day</h2>
+                    <p class="timeline__content-desc">Apollo Gym continues to inspire and maintain its legacy as one of Australia's premier strength and fitness facilities.</p>
+                    <div class="timeline__content-info" style="display:none;">
+                        <h3>Legacy Continues</h3>
+                        <p>Today, Apollo Gym stands as a testament to its rich history while continuing to evolve and adapt to modern fitness needs. The gym maintains its position as one of Australia's premier strength and fitness facilities, inspiring new generations while honoring its historical roots.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- Trainers Section -->
+  <section id="trainers" class="section">
+      <h2 class="section-title">OUR TRAINERS</h2>
+      <p class="section-subtitle">EXPERT GUIDANCE IN AUSTRALIA'S MOST DIVERSE GYM</p>
+      
+      <div class="trainers-container">
+          <div class="trainer-card centered">
+              <h3>PAUL ANDERSON & MARTYN GIRVAN</h3>
+              <p>Over 40 years of experience in the industry, at a national & international level. Well known for success in the field of physical culture & has a reputation of training the trainers in a number of prestigious organisations.</p>
+              <p>Trained beginners to world champions in fields such as: cycling, AFL, athletics, powerlifting, Olympic lifting, body building, martial arts, rugby, netball & odd lifts.</p>
+          </div>
+      </div>
+      
+      <div class="services-container">
+          <h3>PERSONALIZED GUIDANCE - NEVER FEEL LOST</h3>
+          <p>At Apollo Gym, we pride ourselves on being not only the most diverse gym in the country but also on providing top-level guidance on how to use our extensive facilities optimally. Unlike many gyms where members feel lost in the system, our approach ensures you'll receive personalized attention and expert advice.</p>
+          
+          <div class="guidance-features">
+              <div class="guidance-feature">
+                  <h4><i data-lucide="check-circle"></i> PERSONALIZED INDUCTION</h4>
+                  <p>Every new member receives a comprehensive induction to our facilities, ensuring you understand how to use our diverse equipment safely and effectively.</p>
+              </div>
+              
+              <div class="guidance-feature">
+                  <h4><i data-lucide="check-circle"></i> EXPERT FLOOR STAFF</h4>
+                  <p>Our qualified floor staff are always available to provide guidance, correct form, and answer questions - at no additional charge.</p>
+              </div>
+              
+              <div class="guidance-feature">
+                  <h4><i data-lucide="check-circle"></i> CUSTOMIZED TRAINING PLANS</h4>
+                  <p>Receive tailored training programs designed specifically for your goals, whether you're a beginner or an elite athlete.</p>
+              </div>
+              
+              <div class="guidance-feature">
+                  <h4><i data-lucide="check-circle"></i> REGULAR CHECK-INS</h4>
+                  <p>We regularly check in with members to ensure you're progressing and making the most of our diverse facilities.</p>
+              </div>
+          </div>
+          
+          <h3>TRAINING SERVICES</h3>
+          <ul>
+              <li>• ONE TO ONE CLASSES</li>
+              <li>• SMALL GROUP SESSIONS</li>
+              <li>• SMART DEVICE TRAINING THROUGH OUR TEAMBLDR APP</li>
+              <li>• SEMINAR WORK SHOPS</li>
+              <li>• QUALIFIED FLOOR STAFF ASSISTANCE, FREE OF CHARGE</li>
+              <li>• ONLINE PROGRAMMING & SKYPE COACHING</li>
+          </ul>
+      </div>
+  </section>
+
+    <!-- Why Us Section -->
+    <section id="why-us" class="section">
+        <h2 class="section-title">WHY US?</h2>
+        
+        <div class="why-us-container">
+            <h3>Why pick Apollo Gym over other gyms?</h3>
+            
+            <p>At Apollo Gym, we offer something no other gym can replicate: a strong sense of community, a rich history, and an atmosphere unlike any other. With experienced coaches, state-of-the-art equipment, and world-class facilities, we provide everything you need to reach your full potential.</p>
+            
+            <p>When you walk into Apollo Gym, you'll find people from all walks of life, each with their own unique training goals. Whether you're a beginner, a professional lifter, a bodybuilder, or an athlete, Apollo Gym unites everyone under one roof, creating a supportive environment for growth and achievement.</p>
+            
+            <button id="join-community-btn" class="cta-button">JOIN OUR COMMUNITY</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">CONTACT US</h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>HOW TO BOOK A TOUR OR JOIN</h3>
+                
+                <p>TO FULLY APPRECIATE THE VALUE OF APOLLO GYM, WE ENCOURAGE POTENTIAL MEMBERS TO COME IN FOR A VISIT.</p>
+                
+                <p>TOURS & JOIN UPS ARE CONDUCTED MON TO FRI, BW 2.30PM TO 7.30PM.</p>
+                
+                <p>WE ASK IF YOU CAN PLEASE MAKE AN APPOINTMENT DURING THESE HRS, THIS ENABLES OUR TRAINERS TO DEVOTE THEIR TIME TO YOUR specific needs.</p>
+                
+                <p>APPOINTMENT TIMES FOR A TOUR, OR TO JOIN, CAN BE MADE BY CONTACTING PAUL ON 0412 303 524, OR VIA EMAIL.</p>
+                
+                <div class="gym-details">
+                    <h3>Apollo Gym Open 24HRS</h3>
+                    <p>14/2 Burleigh st, Spotswood, Victoria, Australia, 3015</p>
+                    <p>Phone: 0412 303 524</p>
+                    <p>Email: info@apollogym.com</p>
+                </div>
+                
+                <div class="hours">
+                    <p>24 HOURS WE NEVER CLOSE</p>
+                    <p>STAFFED HOURS - MON TO FRIDAY 2.30PM TO 7.30PM</p>
+                </div>
+                
+                <button class="cta-button" onclick="window.location.href='register_interest.html#book-tour'">BOOK A TOUR</button>
+            </div>
+            
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3150.8876144467424!2d144.88424527677566!3d-37.83475987964825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d88c2f15873%3A0xba4839ff91abe605!2sApollo%20Gym%20Open%2024%20hrs!5e0!3m2!1sen!2sau!4v1708997547959!5m2!1sen!2sau"
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <div class="footer-logo">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/apollogymopen24hrs/#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="https://www.instagram.com/apollogym_1" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-column">
+            <p class="footer-description">
+                Our high-end workout gym is one of the best in Melbourne. We are a Gym in Spotswood, Victoria that prides itself on our Exercise programming, Strength training, Cardio workouts, Group fitness classes, and Personal Training.
+            </p>
+            <p class="footer-description">
+                We are your one-stop Fitness Center, that is a family-friendly gym, offering functional circuit training classes, strength training, gym membership access and truly love to inspire everyone we come across.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <p>14/2 Burleigh st,</p>
+            <p>Spotswood, VIC 3015</p>
+            <a href="register_interest.html#book-tour" class="footer-cta">FREE Facility Tour</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Hours:</h3>
+            <div class="hours-grid">
+                <span>Opening Hours:</span><span>24/7</span>
+                <span>Staffed Hours:</span><span>Mon-Fri, 2:30PM - 7:30PM</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <p>&copy; 2025 APOLLO GYM Pty Ltd.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <div id="timeline-popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h3 id="popup-title"></h3>
+            <div id="popup-info"></div>
+        </div>
+    </div>
+
+    <!-- Social Media Popups -->
+    <div id="social-media-popups" class="popup">
+        <div class="popup-content social-popups-container">
+            <span class="close">&times;</span>
+            <h3>JOIN OUR COMMUNITY</h3>
+            
+            <div class="social-previews">
+    <!-- Instagram Preview -->
+    <div class="social-preview instagram-preview">
+        <div class="social-header">
+            <i data-lucide="instagram"></i>
+            <h4>@apollogym_1</h4>
+        </div>
+        <div class="social-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-04%20180808-m3jw7dpH5kbSjInXUHl8e6y9fGhHCr.png" alt="Apollo Gym Instagram Profile">
+        </div>
+        <div class="social-stats">
+            <div class="stat">
+                <span class="number">145</span>
+                <span class="label">posts</span>
+            </div>
+            <div class="stat">
+                <span class="number">703</span>
+                <span class="label">followers</span>
+            </div>
+            <div class="stat">
+                <span class="number">115</span>
+                <span class="label">following</span>
+            </div>
+        </div>
+        <div class="social-info">
+            <h5>Apollo Gym Open 24hrs</h5>
+            <p>Gym/Physical Fitness Center</p>
+            <p>14/2 Burleigh st Spotswood, Melbourne, Victoria, Australia 3015</p>
+            <a href="https://www.instagram.com/apollogym_1" class="social-link" target="_blank">
+                <i data-lucide="external-link"></i> Follow on Instagram
+            </a>
+        </div>
+    </div>
+    
+    <!-- Facebook Preview -->
+    <div class="social-preview facebook-preview">
+        <div class="social-header">
+            <i data-lucide="facebook"></i>
+            <h4>Apollo Gym Open 24 hrs</h4>
+        </div>
+        <div class="social-image">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screenshot%202025-03-04%20180708-IfEIkNxYAhcTCwMUIMBfTcW5sZGr8n.png" alt="Apollo Gym Facebook Page">
+        </div>
+        <div class="social-stats">
+            <div class="stat">
+                <span class="number">302</span>
+                <span class="label">likes</span>
+            </div>
+            <div class="stat">
+                <span class="number">334</span>
+                <span class="label">followers</span>
+            </div>
+        </div>
+        <div class="social-info">
+            <p>Join our Facebook community for daily updates, success stories, and exclusive member content!</p>
+            <a href="https://www.facebook.com/apollogymopen24hrs/#" class="social-link" target="_blank">
+                <i data-lucide="external-link"></i> Visit Facebook Page
+            </a>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Add this to handle the info buttons
+        document.addEventListener("DOMContentLoaded", function() {
+            // Get all info buttons
+            const infoButtons = document.querySelectorAll('.timeline__info-btn');
+            
+            // Add click event to each button
+            infoButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Prevent event bubbling
+                    const content = this.closest('.timeline__content');
+                    const title = content.querySelector('.timeline__content-title').textContent;
+                    const info = content.querySelector('.timeline__content-info').innerHTML;
+                    
+                    document.getElementById('popup-title').textContent = title;
+                    document.getElementById('popup-info').innerHTML = info;
+                    document.getElementById('timeline-popup').style.display = 'block';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

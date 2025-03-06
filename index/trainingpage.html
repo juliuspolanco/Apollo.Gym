@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Training - APOLLO GYM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+      /* Base Styles */
+      :root {
+          --primary-color: #ff1a1a;
+          --secondary-color: #ffffff;
+          --text-color: #ffffff;
+          --accent-color: #ff4d4d;
+          --background-color: #0a0a0a;
+          --border-color: #333333;
+          --vintage-red: #cc0000;
+          --vintage-black: #1a1a1a;
+          --vintage-white: #f2f2f2;
+          --grain-opacity: 0.05;
+      }
+
+      /* Add grain texture overlay */
+      body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+          opacity: var(--grain-opacity);
+          pointer-events: none;
+          z-index: 1;
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Roboto', sans-serif;
+          line-height: 1.6;
+          color: var(--text-color);
+          background-color: var(--background-color);
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Anton', sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+      }
+
+      a {
+          text-decoration: none;
+          color: var(--text-color);
+      }
+
+      ul {
+          list-style: none;
+      }
+
+      .section {
+          padding: 4rem 2rem;
+          scroll-margin-top: 80px;
+          position: relative;
+          margin-top: 2rem;
+      }
+
+      .section::before {
+          content: '★';
+          position: absolute;
+          top: -2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          color: var(--vintage-red);
+          font-size: 1.5rem;
+      }
+
+      .section-title {
+          position: relative;
+          font-size: 3.5rem;
+          text-align: center;
+          letter-spacing: 3px;
+          text-transform: uppercase;
+          color: var(--vintage-white);
+          text-shadow: 3px 3px 0 var(--vintage-red),
+               -1px -1px 0 var(--vintage-black);
+          margin-bottom: 3rem;
+          padding: 0 20px;
+      }
+
+      .section-title::before,
+      .section-title::after {
+          content: '★';
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          color: var(--vintage-red);
+          font-size: 1.5rem;
+      }
+
+      .section-title::before {
+          left: 0;
+      }
+
+      .section-title::after {
+          right: 0;
+      }
+
+      /* Updated and new styles for the CTA button */
+      .cta-button {
+          background: var(--vintage-red);
+          border: 2px solid var(--vintage-white);
+          color: var(--vintage-white);
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          padding: 15px 30px;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          display: inline-block;
+          text-align: center;
+          margin-top: 20px;
+      }
+
+      .cta-button:hover {
+          background: var(--vintage-black);
+          color: var(--vintage-red);
+          border-color: var(--vintage-red);
+          transform: translateY(-2px);
+      }
+
+      /* Header & Navigation */
+      header {
+          background-color: var(--vintage-black);
+          border-bottom: 2px solid var(--vintage-red);
+          position: relative;
+          padding: 1rem 2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+      header::after {
+          content: '';
+          position: absolute;
+          bottom: -2px;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, transparent, var(--vintage-red), transparent);
+      }
+
+      .logo-container {
+          display: flex;
+          align-items: center;
+      }
+
+      .logo {
+          height: 50px;
+          width: auto;
+          margin-right: 15px;
+      }
+
+      nav ul {
+          display: flex;
+          gap: 1.5rem;
+      }
+
+      nav a {
+          font-weight: bold;
+          transition: color 0.3s;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          position: relative;
+          padding: 5px 0;
+      }
+
+      nav a::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--vintage-red);
+          transition: width 0.3s ease;
+      }
+
+      nav a:hover::after {
+          width: 100%;
+      }
+
+      nav a i {
+          width: 18px;
+          height: 18px;
+      }
+
+      nav a:hover {
+          color: var(--primary-color);
+      }
+
+      .register-button {
+          background-color: var(--vintage-red);
+          color: var(--vintage-white);
+          padding: 10px 15px;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+      }
+
+      .register-button:hover {
+          background-color: var(--vintage-white);
+          color: var(--vintage-red);
+      }
+
+      /* Mobile Navigation */
+      .mobile-nav-toggle {
+          display: none;
+          background: none;
+          border: none;
+          color: var(--text-color);
+          font-size: 1.5rem;
+          cursor: pointer;
+      }
+
+      /* Training Page Styles */
+      .training-container,
+      .teambldr-container {
+          max-width: 800px;
+          margin: 0 auto;
+          background: var(--vintage-black);
+          border: 2px solid var(--vintage-red);
+          padding: 2rem;
+          position: relative;
+          margin-bottom: 2rem;
+      }
+
+      .training-container::before,
+      .teambldr-container::before {
+          content: '';
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          right: 5px;
+          bottom: 5px;
+          border: 1px solid rgba(255, 26, 26, 0.3);
+          pointer-events: none;
+      }
+
+      .training-container h3,
+      .teambldr-container h3 {
+          color: var(--vintage-red);
+          margin-bottom: 1rem;
+          font-size: 1.8rem;
+      }
+
+      .training-container ul,
+      .teambldr-container ul {
+          margin-left: 1.5rem;
+          margin-bottom: 1.5rem;
+      }
+
+      .training-container li,
+      .teambldr-container li {
+          margin-bottom: 0.5rem;
+          position: relative;
+      }
+
+      .training-container li::before,
+      .teambldr-container li::before {
+          content: '★';
+          color: var(--vintage-red);
+          position: absolute;
+          left: -1.5rem;
+      }
+
+      /* New footer styles */
+      .footer {
+          background-color: var(--vintage-black);
+          color: var(--vintage-white);
+          padding: 4rem 2rem 1rem;
+          position: relative;
+      }
+
+      .footer-container {
+          max-width: 1400px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 2rem;
+          margin-bottom: 3rem;
+      }
+
+      .footer-column {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+      }
+
+      .footer-logo img {
+          height: 80px;
+          width: auto;
+      }
+
+      .footer-social h3 {
+          margin: 1rem 0;
+          color: var(--vintage-white);
+          font-size: 1.2rem;
+      }
+
+      .social-links {
+          display: flex;
+          gap: 1rem;
+      }
+
+      .social-links a {
+          color: var(--vintage-white);
+          font-size: 1.5rem;
+          transition: color 0.3s ease;
+      }
+
+      .social-links a:hover {
+          color: var(--vintage-red);
+      }
+
+      .footer-description {
+          font-size: 0.9rem;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.8);
+      }
+
+      .footer-column h3 {
+          color: var(--vintage-white);
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+      }
+
+      .hours-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
+          font-size: 0.9rem;
+      }
+
+      .footer-cta {
+          background-color: var(--vintage-white);
+          color: var(--vintage-black);
+          border: none;
+          padding: 0.8rem 1.5rem;
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-top: 1rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+      }
+
+      .footer-cta:hover {
+          background-color: var(--vintage-red);
+          color: var(--vintage-white);
+      }
+
+      .footer-bottom {
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding-top: 1rem;
+      }
+
+      .footer-bottom-content {
+          max-width: 1400px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 0.9rem;
+      }
+
+      .footer-links {
+          display: flex;
+          gap: 2rem;
+      }
+
+      .footer-links a {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+          color: var(--vintage-red);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+          header {
+              flex-direction: column;
+              padding: 1rem;
+          }
+          
+          .logo-container {
+              margin-bottom: 1rem;
+          }
+          
+          nav ul {
+              flex-direction: column;
+              align-items: center;
+          }
+          
+          nav li {
+              margin-bottom: 0.5rem;
+          }
+          
+          .register-button {
+              margin-top: 10px;
+          }
+          
+          .section-title {
+              font-size: 2.5rem;
+          }
+          
+          .footer-container {
+              grid-template-columns: 1fr;
+          }
+
+          .footer-bottom-content {
+              flex-direction: column;
+              gap: 1rem;
+              text-align: center;
+          }
+
+          .footer-links {
+              justify-content: center;
+          }
+      }
+
+      @media (max-width: 1200px) {
+          .footer-container {
+              grid-template-columns: repeat(2, 1fr);
+          }
+      }
+
+      .teambldr-container {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+      }
+
+      #downloadTeambldrApp {
+          align-self: flex-start;
+      }
+
+      /* New styles for training programs */
+      .training-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+          margin: 2rem 0;
+      }
+
+      .training-card {
+          background: rgba(26, 26, 26, 0.7);
+          border: 1px solid var(--vintage-red);
+          padding: 1.5rem;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+      }
+
+      .training-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 5px 15px rgba(204, 0, 0, 0.3);
+      }
+
+      .training-card h4 {
+          color: var(--vintage-red);
+          margin-bottom: 1rem;
+          font-size: 1.3rem;
+          border-bottom: 1px solid rgba(204, 0, 0, 0.3);
+          padding-bottom: 0.5rem;
+      }
+
+      .training-card p {
+          margin-bottom: 1rem;
+      }
+
+      .training-feature {
+          margin-bottom: 1.5rem;
+      }
+
+      .training-feature h4 {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          color: var(--vintage-red);
+          margin-bottom: 0.5rem;
+      }
+
+      .training-feature h4 i {
+          color: var(--vintage-red);
+      }
+
+      .training-feature p {
+          padding-left: 1.8rem;
+      }
+
+      .training-levels {
+          display: flex;
+          justify-content: space-between;
+          margin: 1.5rem 0;
+      }
+
+      .training-level {
+          text-align: center;
+          padding: 1rem;
+          background: rgba(26, 26, 26, 0.5);
+          border: 1px solid rgba(204, 0, 0, 0.3);
+          border-radius: 5px;
+          flex: 1;
+          margin: 0 0.5rem;
+          transition: all 0.3s ease;
+      }
+
+      .training-level:hover {
+          background: rgba(204, 0, 0, 0.2);
+      }
+
+      .training-level h5 {
+          color: var(--vintage-white);
+          margin-bottom: 0.5rem;
+      }
+
+      .training-level p {
+          font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+          .training-grid {
+              grid-template-columns: 1fr;
+          }
+          
+          .training-levels {
+              flex-direction: column;
+          }
+          
+          .training-level {
+              margin: 0.5rem 0;
+          }
+      }
+  </style>
+</head>
+<body>
+  <header>
+      <div class="logo-container">
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+          <h1>APOLLO GYM</h1>
+      </div>
+      <nav>
+          <button class="mobile-nav-toggle">☰</button>
+          <ul>
+              <li><a href="index.html#home"><i data-lucide="home"></i> HOME</a></li>
+              <li><a href="index.html#why-us"><i data-lucide="star"></i> WHY US</a></li>
+              <li><a href="index.html#contact"><i data-lucide="phone"></i> CONTACT</a></li>
+              <li><a href="trainingpage.html"><i data-lucide="dumbbell"></i> TRAINING</a></li>
+              <li><a href="register_interest.html" class="register-button">REGISTER YOUR INTEREST</a></li>
+          </ul>
+      </nav>
+  </header>
+
+  <section id="training" class="section">
+      <h2 class="section-title">TRAINING</h2>
+      <div class="training-container">
+          <p>At Apollo Gym, we offer a wide range of training options to suit all goals. Our experienced trainers provide personalized guidance to help you achieve your fitness objectives.</p>
+          
+          <h3>CUSTOMIZED TRAINING PROGRAMS</h3>
+          <p>Our training programs are designed to match your specific goals, experience level, and preferred training frequency. Each program is carefully crafted to utilize our diverse equipment and is updated weekly to ensure continuous progress.</p>
+          
+          <div class="training-feature">
+              <h4><i data-lucide="target"></i> TAILORED TO YOUR LEVEL</h4>
+              <p>Whether you're a beginner just starting your fitness journey, an intermediate lifter looking to break through plateaus, or an advanced athlete aiming for peak performance, our programs are customized to your current abilities and designed to progressively challenge you.</p>
+          </div>
+          
+          <div class="training-feature">
+              <h4><i data-lucide="calendar"></i> FLEXIBLE TRAINING FREQUENCY</h4>
+              <p>Our programs accommodate various training schedules, from 2-3 days per week for those with busy lifestyles to 5-6 days per week for dedicated athletes. We'll help you determine the optimal training frequency based on your goals, recovery capacity, and lifestyle.</p>
+          </div>
+          
+          <div class="training-feature">
+              <h4><i data-lucide="dumbbell"></i> UTILIZING OUR DIVERSE EQUIPMENT</h4>
+              <p>Each program is designed to take full advantage of our extensive range of equipment. From our 30m length of dumbbells to our specialized machines, your program will incorporate the most effective tools for your specific goals.</p>
+          </div>
+          
+          <div class="training-feature">
+              <h4><i data-lucide="refresh-cw"></i> WEEKLY PROGRAM UPDATES</h4>
+              <p>To prevent plateaus and ensure continuous progress, our programs are updated weekly with new exercises, progressions, and challenges. This systematic variation keeps your training fresh and effective while maintaining focus on your long-term goals.</p>
+          </div>
+          
+          <h3>TRAINING OPTIONS:</h3>
+          <ul>
+              <li>One-on-One Personal Training</li>
+              <li>Small Group Sessions</li>
+              <li>Strength and Conditioning Classes</li>
+              <li>Olympic Weightlifting</li>
+              <li>Powerlifting</li>
+              <li>Functional Fitness</li>
+          </ul>
+          
+          <div class="training-grid">
+              <div class="training-card">
+                  <h4>STRENGTH TRAINING</h4>
+                  <p>Our comprehensive strength training programs utilize our extensive range of free weights, machines, and specialized equipment to help you build muscle, increase strength, and improve overall body composition.</p>
+                  <p>Programs are updated weekly with progressive overload principles to ensure continuous gains while preventing plateaus.</p>
+              </div>
+              
+              <div class="training-card">
+                  <h4>SPORT-SPECIFIC TRAINING</h4>
+                  <p>Tailored programs for athletes looking to improve performance in their specific sport. We've trained champions in cycling, AFL, athletics, powerlifting, Olympic lifting, bodybuilding, martial arts, rugby, and netball.</p>
+                  <p>Programs align with your competitive season and are adjusted weekly based on your progress and upcoming events.</p>
+              </div>
+              
+              <div class="training-card">
+                  <h4>REHABILITATION & INJURY PREVENTION</h4>
+                  <p>Specialized programs designed to help you recover from injuries or prevent them from occurring. Our trainers work closely with healthcare professionals to ensure safe and effective rehabilitation.</p>
+                  <p>Weekly adjustments based on your recovery progress and feedback.</p>
+              </div>
+              
+              <div class="training-card">
+                  <h4>BODY COMPOSITION</h4>
+                  <p>Focused programs for those looking to lose fat, build muscle, or completely transform their physique. Combines strategic resistance training with appropriate cardio protocols.</p>
+                  <p>Weekly updates to keep your body responding optimally and prevent adaptation plateaus.</p>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <section id="teambldr-app" class="section">
+      <h2 class="section-title">TEAMBLDR APP</h2>
+      <div class="teambldr-container">
+          <p>The TeamBldr App is our cutting-edge digital training platform designed to enhance your fitness journey at Apollo Gym.</p>
+          <h3>Features:</h3>
+          <ul>
+              <li>Personalized workout plans</li>
+              <li>Progress tracking</li>
+              <li>Video exercise demonstrations</li>
+              <li>Nutrition guidance</li>
+              <li>Direct communication with trainers</li>
+              <li>Community support and challenges</li>
+          </ul>
+          <p>Download the TeamBldr App today to take your training to the next level!</p>
+          <a href="#" id="downloadTeambldrApp" class="cta-button">Download TeamBldr App</a>
+      </div>
+  </section>
+
+  <footer class="footer">
+  <div class="footer-container">
+      <div class="footer-column">
+          <div class="footer-logo">
+              <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+          </div>
+          <div class="footer-social">
+              <h3>Follow Us</h3>
+              <div class="social-links">
+                  <a href="https://www.facebook.com/apollogymopen24hrs/#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                  <a href="https://www.instagram.com/apollogym_1" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+              </div>
+          </div>
+      </div>
+      
+      <div class="footer-column">
+          <p class="footer-description">
+              Our high-end workout gym is one of the best in Melbourne. We are a Gym in Spotswood, Victoria that prides itself on our Exercise programming, Strength training, Cardio workouts, Group fitness classes, and Personal Training.
+          </p>
+          <p class="footer-description">
+              We are your one-stop Fitness Center, that is a family-friendly gym, offering functional circuit training classes, strength training, gym membership access and truly love to inspire everyone we come across.
+          </p>
+      </div>
+
+      <div class="footer-column">
+          <h3>Contact</h3>
+          <p>14/2 Burleigh st,</p>
+          <p>Spotswood, VIC 3015</p>
+          <a href="register_interest.html#book-tour" class="footer-cta">FREE Facility Tour</a>
+      </div>
+
+      <div class="footer-column">
+          <h3>Hours:</h3>
+          <div class="hours-grid">
+              <span>Opening Hours:</span><span>24/7</span>
+              <span>Staffed Hours:</span><span>Mon-Fri, 2:30PM - 7:30PM</span>
+          </div>
+      </div>
+  </div>
+  
+  <div class="footer-bottom">
+      <div class="footer-bottom-content">
+          <p>&copy; 2025 APOLLO GYM Pty Ltd.</p>
+          <div class="footer-links">
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms & Conditions</a>
+          </div>
+      </div>
+  </div>
+</footer>
+
+  <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Mobile Navigation Toggle
+      document.addEventListener('DOMContentLoaded', function() {
+          const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+          const nav = document.querySelector('nav ul');
+
+          mobileNavToggle.addEventListener('click', function() {
+              nav.classList.toggle('show');
+          });
+
+          // Device detection and link setting for TeamBldr App download
+          const downloadButton = document.getElementById('downloadTeambldrApp');
+          
+          if (downloadButton) {
+              let downloadLink = 'https://www.teambuildr.com/'; // Default link for Windows/other users
+
+              // Check if the user is on an iOS device
+              if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                  downloadLink = 'https://apps.apple.com/us/app/teambuildr-training/id1588729407';
+              } 
+              // Check if the user is on an Android device
+              else if (/android/i.test(navigator.userAgent)) {
+                  downloadLink = 'https://play.google.com/store/search?q=teambuildr+app&c=apps&hl=en';
+              }
+
+              downloadButton.href = downloadLink;
+          }
+      });
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Interest - APOLLO GYM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #ff1a1a;
+            --secondary-color: #ffffff;
+            --text-color: #ffffff;
+            --accent-color: #ff4d4d;
+            --background-color: #0a0a0a;
+            --border-color: #333333;
+            --vintage-red: #cc0000;
+            --vintage-black: #1a1a1a;
+            --vintage-white: #f2f2f2;
+            --grain-opacity: 0.05;
+        }
+
+        /* Add grain texture overlay */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3Cfilter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: var(--grain-opacity);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        h1, h2, h3, h4, h5, h5 {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            scroll-margin-top: 80px;
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .section::before {
+            content: '★';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--vintage-red);
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            position: relative;
+            font-size: 3.5rem;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vintage-white);
+            text-shadow: 3px 3px 0 var(--vintage-red),
+                 -1px -1px 0 var(--vintage-black);
+            margin-bottom: 3rem;
+            padding: 0 20px;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '★';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--vintage-red);
+            font-size: 1.5rem;
+        }
+
+        .section-title::before {
+            left: 0;
+        }
+
+        .section-title::after {
+            right: 0;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--vintage-black);
+            border-bottom: 2px solid var(--vintage-red);
+            position: relative;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--vintage-red), transparent);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px;
+            width: auto;
+            margin-right: 15px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            font-weight: bold;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--vintage-red);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a i {
+            width: 18px;
+            height: 18px;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .register-button {
+            background-color: var(--vintage-red);
+            color: var(--vintage-white);
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: var(--vintage-white);
+            color: var(--vintage-red);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Registration Form Styles */
+        .registration-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--vintage-black);
+            border: 2px solid var(--vintage-red);
+            padding: 2rem;
+            position: relative;
+        }
+
+        .registration-form::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(255, 26, 26, 0.3);
+            pointer-events: none;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--vintage-white);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: var(--vintage-black);
+            border: 1px solid var(--vintage-red);
+            color: var(--vintage-white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-button {
+            background: var(--vintage-red);
+            border: 2px solid var(--vintage-white);
+            color: var(--vintage-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--vintage-black);
+            color: var(--vintage-red);
+            border-color: var(--vintage-red);
+        }
+
+        /* Book Tour Section Styles */
+        .book-tour-section {
+            max-width: 600px;
+            margin: 4rem auto 0;
+            background: var(--vintage-black);
+            border: 2px solid var(--vintage-red);
+            padding: 2rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .book-tour-section::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(255, 26, 26, 0.3);
+            pointer-events: none;
+        }
+
+        .book-tour-section h3 {
+            color: var(--vintage-red);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .book-tour-section p {
+            margin-bottom: 1.5rem;
+            color: var(--vintage-white);
+            text-align: left;
+        }
+
+        .call-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--vintage-red);
+            border: 2px solid var(--vintage-white);
+            color: var(--vintage-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .call-button:hover {
+            background: var(--vintage-black);
+            color: var(--vintage-red);
+            border-color: var(--vintage-red);
+            transform: translateY(-2px);
+        }
+
+        /* Review Section Styles */
+        .review-section {
+            max-width: 600px;
+            margin: 4rem auto 0;
+            background: var(--vintage-black);
+            border: 2px solid var(--vintage-red);
+            padding: 2rem;
+            position: relative;
+            text-align: center;
+        }
+
+        .review-section::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(255, 26, 26, 0.3);
+            pointer-events: none;
+        }
+
+        .review-section h3 {
+            color: var(--vintage-red);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-section p {
+            margin-bottom: 1.5rem;
+            color: var(--vintage-white);
+        }
+
+        .review-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--vintage-red);
+            border: 2px solid var(--vintage-white);
+            color: var(--vintage-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .review-button:hover {
+            background: var(--vintage-black);
+            color: var(--vintage-red);
+            border-color: var(--vintage-red);
+            transform: translateY(-2px);
+        }
+
+        .review-stars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: gold;
+            font-size: 2rem;
+        }
+
+        /* Modal Popup Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: var(--vintage-black);
+            margin: 15% auto;
+            padding: 2rem;
+            border: 2px solid var(--vintage-red);
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        .close-modal {
+            color: var(--vintage-red);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
+        .modal-content h3 {
+            color: var(--vintage-red);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .phone-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--vintage-white);
+            text-align: center;
+            display: block;
+            margin: 1rem 0;
+        }
+
+        /* New footer styles */
+        .footer {
+            background-color: var(--vintage-black);
+            color: var(--vintage-white);
+            padding: 4rem 2rem 1rem;
+            position: relative;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        .footer-social h3 {
+            margin: 1rem 0;
+            color: var(--vintage-white);
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--vintage-white);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--vintage-red);
+        }
+
+        .footer-description {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-column h3 {
+            color: var(--vintage-white);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-cta {
+            background-color: var(--vintage-white);
+            color: var(--vintage-black);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-cta:hover {
+            background-color: var(--vintage-red);
+            color: var(--vintage-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1rem;
+        }
+
+        .footer-bottom-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--vintage-red);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .logo-container {
+                margin-bottom: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin-bottom: 0.5rem;
+            }
+            
+            .register-button {
+                margin-top: 10px;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+            <h1>APOLLO GYM</h1>
+        </div>
+        <nav>
+            <button class="mobile-nav-toggle">☰</button>
+            <ul>
+                <li><a href="index.html#home"><i data-lucide="home"></i> HOME</a></li>
+                <li><a href="index.html#why-us"><i data-lucide="star"></i> WHY US</a></li>
+                <li><a href="index.html#contact"><i data-lucide="phone"></i> CONTACT</a></li>
+                <li><a href="trainingpage.html"><i data-lucide="dumbbell"></i> TRAINING</a></li>
+                <li><a href="register_interest.html" class="register-button">REGISTER YOUR INTEREST</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="register" class="section">
+        <h2 class="section-title">REGISTER YOUR INTEREST</h2>
+        <form class="registration-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Additional Comments</label>
+                <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="submit-button">Register Interest</button>
+        </form>
+        
+        <div class="book-tour-section" id="book-tour">
+            <h3>BOOK A TOUR</h3>
+            <p>Experience the Apollo Gym difference firsthand with a personalized facility tour. Our knowledgeable staff will guide you through our facility, showcasing our equipment, training areas, and unique features that set us apart from other gyms. During your tour, you'll have the opportunity to ask questions, discuss your fitness goals, and learn how our gym can help you achieve optimal results.</p>
+            <p>Tours are available any day of the week, allowing you to see our facility in action and meet our dedicated team. Don't miss this opportunity to explore what could be your new fitness home!</p>
+            
+            <a href="tel:0412303524" id="callButton" class="call-button">
+                <i data-lucide="phone-call"></i> CALL NOW TO BOOK
+            </a>
+        </div>
+        
+        <div class="review-section">
+            <h3>ALREADY A MEMBER?</h3>
+            <p>Your feedback helps us improve and lets others know about your experience at Apollo Gym. We appreciate your support!</p>
+            
+            <div class="review-stars">
+                <i data-lucide="star"></i>
+                <i data-lucide="star"></i>
+                <i data-lucide="star"></i>
+                <i data-lucide="star"></i>
+                <i data-lucide="star"></i>
+            </div>
+            
+            <a href="https://www.google.com/search?sca_esv=8d768c6a0d450c4a&rlz=1C1RXQR_enAU1150AU1150&sxsrf=AHTn8zrsXyZajp_XTwRSXcjnig1Hx09xIQ:1741066129050&si=APYL9bvoDGWmsM6h2lfKzIb8LfQg_oNQyUOQgna9TyfQHAoqUnrqKxOBrwKJzfkYC4FDk65Y5Q_s-7wmx9Ffem-B7aSdUZK0FlpcO1EsKiYn5Cb6w_YjOooRPYZ5_Zff-UZhOifcGpSoqViLAkOSN1CEqX9af9qsfA%3D%3D&q=Apollo+Gym+Open+24+hrs+Reviews&sa=X&ved=2ahUKEwjr7pvh2O-LAxWZT2wGHWDwLqoQ0bkNegQIIRAE&biw=1920&bih=991&dpr=1" target="_blank" class="review-button">
+                <i data-lucide="message-square"></i> LEAVE A REVIEW
+            </a>
+        </div>
+    </section>
+
+    <!-- Modal for desktop users -->
+    <div id="callModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>BOOK A TOUR</h3>
+            <p>Please call the following number on a mobile device to book a tour or make inquiries:</p>
+            <span class="phone-number">0412 303 524</span>
+            <p>Our staff is available any day of the week to assist you.</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <div class="footer-logo">
+                <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/278200623_641482380226044_7133700302087388230_n.jpg-NOPUwTQVvdgnhC2QnctULWUP7Oz2yT.jpeg" alt="APOLLO GYM" class="logo">
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/apollogymopen24hrs/#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                    <a href="https://www.instagram.com/apollogym_1" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-column">
+            <p class="footer-description">
+                Our high-end workout gym is one of the best in Melbourne. We are a Gym in Spotswood, Victoria that prides itself on our Exercise programming, Strength training, Cardio workouts, Group fitness classes, and Personal Training.
+            </p>
+            <p class="footer-description">
+                We are your one-stop Fitness Center, that is a family-friendly gym, offering functional circuit training classes, strength training, gym membership access and truly love to inspire everyone we come across.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <p>14/2 Burleigh st,</p>
+            <p>Spotswood, VIC 3015</p>
+            <a href="#book-tour" class="footer-cta">FREE Facility Tour</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Hours:</h3>
+            <div class="hours-grid">
+                <span>Opening Hours:</span><span>24/7</span>
+                <span>Staffed Hours:</span><span>Mon-Fri, 2:30PM - 7:30PM</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <p>&copy; 2025 APOLLO GYM Pty Ltd.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms & Conditions</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile Navigation Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+            const nav = document.querySelector('nav ul');
+
+            mobileNavToggle.addEventListener('click', function() {
+                nav.classList.toggle('show');
+            });
+            
+            // Call button functionality
+            const callButton = document.getElementById('callButton');
+            const modal = document.getElementById('callModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            // Check if device is mobile
+            function isMobileDevice() {
+                return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+            }
+            
+            // Handle call button click
+            callButton.addEventListener('click', function(e) {
+                if (!isMobileDevice()) {
+                    e.preventDefault();
+                    modal.style.display = "block";
+                }
+                // If mobile, the default behavior (tel: link) will work
+            });
+            
+            // Close modal when clicking the X
+            closeModal.addEventListener('click', function() {
+                modal.style.display = "none";
+            });
+            
+            // Close modal when clicking outside of it
+            window.addEventListener('click', function(e) {
+                if (e.target == modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
