@@ -168,12 +168,13 @@ document.addEventListener("DOMContentLoaded", () => {
   // Social Media Popups
   const joinCommunityButton = document.getElementById("join-community-btn")
   const socialMediaPopups = document.getElementById("social-media-popups")
-  const socialMediaClose = socialMediaPopups.querySelector(".close")
+  const socialMediaClose = socialMediaPopups ? socialMediaPopups.querySelector(".close") : null
 
   // Show social media popups when "JOIN OUR COMMUNITY" button is clicked
   if (joinCommunityButton) {
     joinCommunityButton.addEventListener("click", (e) => {
       e.preventDefault()
+      e.stopPropagation()
       socialMediaPopups.style.display = "block"
 
       // Initialize Lucide icons in the popup
@@ -181,16 +182,18 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  // Close social media popups
+  // Close social media popups - improved for mobile
   if (socialMediaClose) {
-    socialMediaClose.addEventListener("click", () => {
+    socialMediaClose.addEventListener("click", (e) => {
+      e.preventDefault()
+      e.stopPropagation()
       socialMediaPopups.style.display = "none"
     })
   }
 
   // Close social media popups when clicking outside
   window.addEventListener("click", (e) => {
-    if (e.target === socialMediaPopups) {
+    if (socialMediaPopups && e.target === socialMediaPopups) {
       socialMediaPopups.style.display = "none"
     }
   })
@@ -204,6 +207,43 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
   })
+
+  // Add touch support for equipment slider
+  if (sliderContainer) {
+    let touchStartX = 0
+    let touchEndX = 0
+
+    sliderContainer.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.changedTouches[0].screenX
+      },
+      false,
+    )
+
+    sliderContainer.addEventListener(
+      "touchend",
+      (e) => {
+        touchEndX = e.changedTouches[0].screenX
+        handleSwipe()
+      },
+      false,
+    )
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+        // Swipe left - next slide
+        currentSlide = (currentSlide + 1) % slides.length
+        showSlide(currentSlide)
+      }
+
+      if (touchEndX > touchStartX + 50) {
+        // Swipe right - previous slide
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length
+        showSlide(currentSlide)
+      }
+    }
+  }
 
   // Add retro effect to titles on scroll
   const titles = document.querySelectorAll(".section-title")
@@ -260,4 +300,5 @@ document.addEventListener("DOMContentLoaded", () => {
 // Initialize Lucide icons
 const lucide = window.lucide
 lucide.createIcons()
+
 
