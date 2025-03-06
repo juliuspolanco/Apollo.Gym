@@ -615,6 +615,44 @@
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
+        /* Enhanced Mobile Styles */
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .submit-button, .call-button, .review-button, .cta-button, .footer-cta {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .book-tour-section, .review-section, .registration-form {
+                padding: 1.5rem;
+            }
+            
+            .modal-content {
+                width: 90%;
+                margin: 30% auto;
+                padding: 1.5rem;
+            }
+            
+            .close-modal {
+                font-size: 32px; /* Larger hit area for mobile */
+                padding: 10px;
+                position: absolute;
+                right: 10px;
+                top: 5px;
+            }
+            
+            /* Ensure form elements are properly sized on mobile */
+            .form-group input, 
+            .form-group textarea {
+                padding: 12px;
+                font-size: 16px; /* Prevents iOS zoom on focus */
+            }
+        }
     </style>
 </head>
 <body>
@@ -637,7 +675,7 @@
 
     <section id="register" class="section">
         <h2 class="section-title">REGISTER YOUR INTEREST</h2>
-        <form class="registration-form">
+        <form class="registration-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
@@ -656,6 +694,11 @@
             </div>
             <button type="submit" class="submit-button">Register Interest</button>
         </form>
+        
+        <div id="form-success" style="display: none; background-color: var(--vintage-black); border: 2px solid var(--vintage-red); padding: 1.5rem; margin-top: 1.5rem; text-align: center;">
+            <h3 style="color: var(--vintage-red); margin-bottom: 1rem;">Thank You!</h3>
+            <p>Your registration has been submitted successfully. We'll contact you soon!</p>
+        </div>
         
         <div class="book-tour-section" id="book-tour">
             <h3>BOOK A TOUR</h3>
@@ -764,26 +807,32 @@
             const callButton = document.getElementById('callButton');
             const modal = document.getElementById('callModal');
             const closeModal = document.querySelector('.close-modal');
-            
+
             // Check if device is mobile
             function isMobileDevice() {
                 return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
             }
-            
+
             // Handle call button click
-            callButton.addEventListener('click', function(e) {
-                if (!isMobileDevice()) {
+            if (callButton) {
+                callButton.addEventListener('click', function(e) {
+                    if (!isMobileDevice()) {
+                        e.preventDefault();
+                        modal.style.display = "block";
+                    }
+                    // If mobile, the default behavior (tel: link) will work
+                });
+            }
+
+            // Close modal when clicking the X - improved for mobile
+            if (closeModal) {
+                closeModal.addEventListener('click', function(e) {
                     e.preventDefault();
-                    modal.style.display = "block";
-                }
-                // If mobile, the default behavior (tel: link) will work
-            });
-            
-            // Close modal when clicking the X
-            closeModal.addEventListener('click', function() {
-                modal.style.display = "none";
-            });
-            
+                    e.stopPropagation();
+                    modal.style.display = "none";
+                });
+            }
+
             // Close modal when clicking outside of it
             window.addEventListener('click', function(e) {
                 if (e.target == modal) {
@@ -791,7 +840,23 @@
                 }
             });
         });
+
+        // Form submission handling
+        const form = document.querySelector('.registration-form');
+        const formSuccess = document.getElementById('form-success');
+
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                // If using Formspree, you can add success handling here
+                // This will only run if you're not using the action attribute method
+                // e.preventDefault();
+                // formSuccess.style.display = 'block';
+                // form.style.display = 'none';
+            });
+        }
     </script>
 </body>
 </html>
+
+
 
